@@ -16,13 +16,17 @@ send_frontend() {
     $OUT = $1
     tries = 0
 
+    echo "Sending result"
+
     until [ "$n" -ge 3 ]; do
+        echo "Try: " $(( n + 1 ))
         curl -s --request POST --form source='opendata_xref-france' --form code="$OSMOSEPASS" --form content=@$OUT -H 'Host: osmose.openstreetmap.fr' "${URL_FRONTEND_UPDATE}" && break
         n=$(( n + 1 ))
+        sleep 300
     done
 
     if [ "$n" -eq 3 ]; do
-        echo "Impossible to send result"
+        echo "Impossible to send results"
         exit 1
     done
 }
