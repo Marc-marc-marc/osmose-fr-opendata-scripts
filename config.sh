@@ -4,7 +4,7 @@
 
 WORKDIR=/home/cquest/osmose
 
-osmose_config_password="${WORKDIR}/osmose_config_password.sh"
+osmose_config_password=/home/cquest/osmose/osmose_config_password.sh
 if [ -f ${osmose_config_password} ]; then
   echo "sourcing ${osmose_config_password}..."
   . ${osmose_config_password} || exit 1
