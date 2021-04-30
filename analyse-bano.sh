@@ -1,10 +1,13 @@
 #! /bin/bash
 
+source $(dirname $0)/config.sh
+
 CLASS="30  31 32 33"
 DEPS="`seq -w 01 19` 2A 2B `seq 21 95` `seq 971 976`"
 #DEPS='77 89 94'
 
 # vue matérialisée des manques OSM d'après BANO
+echo "remplissage table bano_manque"
 PGOPTIONS='--client-min-messages=warning' psql osm -c "
 CREATE TABLE if not exists bano_manque (fantoir char(10), voie_cadastre varchar(300), nb int, geom geometry);
 TRUNCATE bano_manque;
@@ -21,6 +24,7 @@ INSERT INTO bano_manque
 "
 
 
+echo "creation vue bano_analyse"
 psql osm -c "
 create or replace view bano_analyse as select * from (
 select fantoir, case
@@ -70,13 +74,11 @@ select fantoir, case
   ) as m order by l_noname desc, l desc) as e where er != '';
 "
 
-source $(dirname $0)/config.sh
-
 for class in $CLASS
 do
 OUT=/home/cquest/osmose/insee_bano-france-$class.xml.gz
 
-echo "class: $class"
+echo "class: $class generation du fichier $OUT"
 
 echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
 <analysers timestamp=\"`date -u +%Y-%m-%dT%H:%M:%SZ`\">
@@ -108,6 +110,7 @@ echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
     </class>
 "| gzip -9 >> $OUT
 
+echo -n "DEPS (un point par departement) :"
 for d in $DEPS; do
 echo -n '.'
 PGOPTIONS='--client-min-messages=warning' psql osm -qc "
@@ -123,7 +126,8 @@ echo "  </analyser>
 
 echo ""
 
-curl -v --form source='opendata_xref-france' --form code="$OSMOSEPASS" --form content=@$OUT -H 'Host: osmose.openstreetmap.fr' http://osm153.openstreetmap.fr/control/send-update
+echo "sending to osmose frontend"
+curl -v --form source='opendata_xref-france' --form code="$OSMOSEPASS" --form content=@$OUT -H 'Host: osmose.openstreetmap.fr' "${URL_FRONTEND_UPDATE}" && echo -e "\n\rcurl ok" || echo -e "\n\rcurl ko"
 
 done
 
@@ -209,5 +213,4 @@ done
 echo "  </analyser>
 </analysers>" | gzip -9 >> $OUT
 
-curl -s --request POST --form source='opendata_xref-france' --form code="$OSMOSEPASS" --form content=@$OUT -H 'Host: osmose.openstreetmap.fr' http://osm153.openstreetmap.fr/control/send-update
-
+curl -s --request POST --form source='opendata_xref-france' --form code="$OSMOSEPASS" --form content=@$OUT -H 'Host: osmose.openstreetmap.fr' "${URL_FRONTEND_UPDATE}"
