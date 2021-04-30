@@ -25,7 +25,7 @@ send_frontend() {
         sleep 300
     done
 
-    if [ "$tries" -eq 3 ]; do
+    if [ "$tries" -eq 4 ]; do
         echo "Impossible to send results"
         exit 1
     done
