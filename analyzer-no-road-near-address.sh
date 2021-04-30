@@ -2,7 +2,7 @@
 
 source $(dirname $0)/config.sh
 
-OUT="${WORKDIR}/adresses_sans_route-france.xml"
+OUT=/home/cquest/public_html/adresses_sans_route-france.xml
 DIST=200
 
 echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>

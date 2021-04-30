@@ -2,7 +2,7 @@
 
 source $(dirname $0)/config.sh
 
-OUT="${WORKDIR}/insee_route500-france.xml"
+OUT=/home/cquest/public_html/insee_route500-france.xml
 
 psql osm -c "refresh materialized view r500_pts;"
 

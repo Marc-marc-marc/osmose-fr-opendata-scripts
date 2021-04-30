@@ -2,7 +2,7 @@
 
 source $(dirname $0)/config.sh
 
-OUT="${WORKDIR}/building_sans_route-france.xml"
+OUT=/home/cquest/public_html/building_sans_route-france.xml
 DIST=200
 DEP=$1
 
