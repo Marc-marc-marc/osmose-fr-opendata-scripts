@@ -2,7 +2,7 @@
 
 source $(dirname $0)/config.sh
 
-OUT=/home/cquest/public_html/insee_route500-france-lanes.xml
+OUT="${WORKDIR}/insee_route500-france-lanes.xml"
 
 echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
 <analysers timestamp=\"`date -u +%Y-%m-%dT%H:%M:%SZ`\">

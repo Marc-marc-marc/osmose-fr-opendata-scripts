@@ -2,7 +2,7 @@
 
 source $(dirname $0)/../config.sh
 
-OUT=test.xml.gz
+OUT="${WORKDIR}/test.xml.gz"
 rm -f $OUT
 
 echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>

@@ -2,7 +2,7 @@
 
 source $(dirname $0)/../config.sh
 
-OUT=test-waterways.xml.gz
+OUT="${WORKDIR}/test-waterways.xml.gz"
 ERROR=98
 rm -f $OUT
 

@@ -2,7 +2,7 @@
 
 source $(dirname $0)/../config.sh
 
-OUT=7170_3_decalage.xml.gz
+OUT="${WORKDIR}/7170_3_decalage.xml.gz"
 ERROR=3
 rm -f $OUT
 

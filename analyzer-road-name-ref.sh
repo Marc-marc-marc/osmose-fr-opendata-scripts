@@ -2,8 +2,7 @@
 
 source $(dirname $0)/config.sh
 
-OUT=/home/cquest/public_html/roads-similar-name-ref.xml
-OUT=roads-similar-name-ref.xml
+OUT="${WORKDIR}/roads-similar-name-ref.xml"
 
 echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
 <analysers timestamp=\"`date -u +%Y-%m-%dT%H:%M:%SZ`\">

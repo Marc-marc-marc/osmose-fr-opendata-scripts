@@ -2,7 +2,7 @@
 
 source $(dirname $0)/config.sh
 
-OUT=volta_lignes_RTE.xml.gz
+OUT="${WORKDIR}/volta_lignes_RTE.xml.gz"
 ERROR=95
 rm -f $OUT
 
