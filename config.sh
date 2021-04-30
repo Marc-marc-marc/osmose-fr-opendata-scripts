@@ -11,3 +11,18 @@ else
 fi
 
 export URL_FRONTEND_UPDATE="http://osmose.openstreetmap.fr/control/send-update"
+
+send_frontend() {
+    $OUT = $1
+    tries = 0
+
+    until [ "$n" -ge 3 ]; do
+        curl -s --request POST --form source='opendata_xref-france' --form code="$OSMOSEPASS" --form content=@$OUT -H 'Host: osmose.openstreetmap.fr' "${URL_FRONTEND_UPDATE}" && break
+        n=$(( n + 1 ))
+    done
+
+    if [ "$n" -eq 3 ]; do
+        echo "Impossible to send result"
+        exit 1
+    done
+}
