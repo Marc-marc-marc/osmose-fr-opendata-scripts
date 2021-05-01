@@ -76,7 +76,7 @@ select fantoir, case
 
 for class in $CLASS
 do
-OUT=/home/cquest/osmose/insee_bano-france-$class.xml.gz
+OUT="${WORKDIR}/insee_bano-france-$class.xml.gz"
 
 echo "class: $class generation du fichier $OUT"
 

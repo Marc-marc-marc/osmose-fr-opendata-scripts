@@ -2,7 +2,7 @@
 
 source $(dirname $0)/config.sh
 
-OUT=volta-postes.xml.gz
+OUT="${WORKDIR}/volta-postes.xml.gz"
 ERROR=94
 rm -f $OUT
 

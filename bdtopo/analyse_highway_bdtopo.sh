@@ -2,7 +2,7 @@
 
 source $(dirname $0)/../config.sh
 
-OUT=7170_1_route_manquante.xml.gz
+OUT="${WORKDIR}/7170_1_route_manquante.xml.gz"
 ERROR=1
 rm -f $OUT
 

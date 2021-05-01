@@ -2,7 +2,7 @@
 
 source $(dirname $0)/../config.sh
 
-OUT=7170_20_lanes.xml.gz
+OUT="${WORKDIR}/7170_20_lanes.xml.gz"
 ERROR=20
 rm -f $OUT
 
